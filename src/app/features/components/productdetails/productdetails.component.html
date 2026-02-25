@@ -1,0 +1,14 @@
+<section class=" mt-12 justify-between mb-5 flex flex-col items-center bg-neutral-primary-soft shadow-xs md:flex-row md:flex-row">
+    <img class="object-cover  rounded-base md:w-1/4 mb-4 md:mb-0" [src]="product().imageCover" [alt]="product().title">
+    <div class="flex md:w-3/4 flex-col justify-between md:p-4 leading-normal">
+        <p>{{date|date:'longDate'}}</p>
+        <h1 class="mb-2 text-xl font-bold tracking-tight text-heading">{{product().title}}</h1>
+        <p class="mb-6 text-body">{{product().description}}</p>
+        <span class="mb-3 text-sm text-green-700">{{product().category.name}}</span>
+        <div class="flex justify-between items-center mb-3">
+            <span>{{product().price |currency:'EUR'}} EGP</span>
+            <span><i class="fas fa-star text-yellow-300"></i>{{product().ratingsAverage}}</span>
+        </div>
+        <button (click)="addProductToCart(product()._id)" class="rounded text-white w-full bg-green-700 py-1">+ Add To Cart</button>
+    </div>
+</section>
