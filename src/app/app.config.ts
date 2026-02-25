@@ -1,18 +1,22 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import {provideTranslateService, TranslateService} from "@ngx-translate/core";
 import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
-
+import { setHeaderInterceptor } from './core/interceptors/setHeader/set-header-interceptor';
+import { errorInterceptor } from './core/interceptors/error/error-interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { provideAnimations} from '@angular/platform-browser/animations'
+import { spinnerInterceptor } from './core/interceptors/spinner/spinner-interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes), provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([setHeaderInterceptor,errorInterceptor,spinnerInterceptor])),
     provideToastr(),
     provideTranslateService({
       lang: 'en',
@@ -22,5 +26,7 @@ export const appConfig: ApplicationConfig = {
         suffix: '.json'
       })
     }),
+    importProvidersFrom(NgxSpinnerModule),
+    provideAnimations(),
   ]
 };

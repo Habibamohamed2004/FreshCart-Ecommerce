@@ -13,11 +13,13 @@ export class OrderService {
     return this.httpClient.post(`${enviroment.baseUrl}/api/v1/orders/${cartId}`,
       {
         shippingAddress: data
-      },
+      }
+    )
+  }
+  checkOut(cartId:string,data:ShippingaddressData):Observable<any>{
+    return this.httpClient.post(`${enviroment.baseUrl}/api/v1/orders/checkout-session${cartId}?url=${enviroment.domain}`,
       {
-        headers:{
-          token:localStorage.getItem('userToken') || ''
-        }
+        shippingAddress: data
       }
     )
   }
