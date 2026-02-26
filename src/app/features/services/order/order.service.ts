@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { enviroment } from '../../../../enviroment/enviroment';
 import { ShippingaddressData } from '../../../shared/models/data';
 import { Observable } from 'rxjs';
+import { env } from 'process';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +23,8 @@ export class OrderService {
         shippingAddress: data
       }
     )
+  }
+  getUserOrders(userId:string):Observable<any>{
+    return this.httpClient.get(`${enviroment.baseUrl}/api/v1/orders/user/${userId}`)
   }
 }

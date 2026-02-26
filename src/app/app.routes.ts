@@ -25,6 +25,7 @@ export const routes: Routes = [
     {path:'categories', component:CategoriesComponent, title:'categories'},
     {path:'categories/:categoryId', component:CategoriesComponent, title:'categories'},
     {path:'brands', component:BrandsComponent, title:'brands'},
+    {path:'brands/:brandId', component:BrandsComponent, title:'brands'},
     {path:'login', component:LoginComponent, title:'login'},
     {path:'register', component:RegisterComponent, title:'register'},
     {path:'forgetpassword',component:ForgetpasswordComponent,title:'forgetpassword'},

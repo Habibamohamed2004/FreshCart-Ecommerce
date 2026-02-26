@@ -1,1 +1,98 @@
-<p>allorders works!</p>
+<section class="container py-4">
+
+  <h1 class="text-xl font-semibold  text-heading">My Orders: </h1>
+
+  <!-- Loading State -->
+  @if (isLoading) {
+    <div class="text-center py-5">
+      <span class="spinner-border"></span>
+    </div>
+  }
+
+  <!-- Orders Exist -->
+  @if (!isLoading && orders().length > 0) {
+
+    @for (order of orders(); track order._id) {
+      <div class="card mb-4 shadow-sm">
+
+        <div class="card-header d-flex justify-content-between">
+          <div>
+            <strong>Order Date:</strong>
+            {{ order.createdAt | date:'medium' }}
+          </div>
+
+          <div>
+            <strong>Total:</strong>
+            {{ order.totalOrderPrice }} EGP
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <p>
+            <strong>Payment Method:</strong>
+            {{ order.paymentMethodType }}
+          </p>
+
+          <p>
+            <strong>Status:</strong>
+            @if (order.isPaid) {
+              <span class="badge bg-success">Paid</span>
+            } @else {
+              <span class="badge bg-warning text-dark">Not Paid</span>
+            }
+
+            @if (order.isDelivered) {
+              <span class="badge bg-success ms-2">Delivered</span>
+            } @else {
+              <span class="badge bg-secondary ms-2">Not Delivered</span>
+            }
+          </p>
+
+          <hr>
+
+          <!-- Cart Items -->
+          <h6 class="mb-3">Products:</h6>
+
+          @for (item of order.cartItems; track item._id) {
+            <div class="d-flex align-items-center mb-3 border-bottom pb-2">
+
+              <img
+                [src]="item.product.imageCover"
+                width="80"
+                class="me-3 rounded"
+                alt="product image"
+              />
+
+              <div class="flex-grow-1">
+                <h6 class="mb-1">
+                  {{ item.product.title }}
+                </h6>
+
+                <small>
+                  Quantity: {{ item.count }}
+                </small>
+              </div>
+
+              <div>
+                {{ item.price }} EGP
+              </div>
+
+            </div>
+          }
+
+        </div>
+
+      </div>
+    }
+
+  }
+
+  <!-- No Orders -->
+  @if (!isLoading && orders().length === 0) {
+    <div class="text-center py-5">
+      <h5>No Orders Found 🛒</h5>
+    </div>
+  }
+
+</section>
