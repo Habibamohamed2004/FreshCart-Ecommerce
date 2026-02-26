@@ -26,8 +26,8 @@ export class ShippingaddressComponent {
     if(this.shippingAddressForm.valid){
       this.activatedRoute.params.subscribe({
         next:data=>{
-          console.log(data['id']);
-          this.orderService.createCashOrder(data['id'],this.shippingAddressForm.value).subscribe({
+          console.log(data['cartid']);
+          this.orderService.createCashOrder(data['cartid'],this.shippingAddressForm.value).subscribe({
             next:res =>{
               console.log(res);
               this.router.navigate(['allorders']);
@@ -44,8 +44,8 @@ export class ShippingaddressComponent {
     if(this.shippingAddressForm.valid){
       this.activatedRoute.params.subscribe({
         next:data=>{
-          console.log(data['id']);
-          this.orderService.checkOut(data['id'],this.shippingAddressForm.value).subscribe({
+          console.log(data['cartid']);
+          this.orderService.checkOut(data['cartid'],this.shippingAddressForm.value).subscribe({
             next:res =>{
               window.open(res.session.url,'_self')
             }

@@ -30,6 +30,6 @@
                 </li>
             }
         </ul>
-        <button routerLink="['/shippingaddress',cartData(),._id]" class="btn-main ms-auto block">Order</button>
+        <button [routerLink]="['/shippingaddress', cartData()?._id]" class="btn-main cursor-pointer ms-auto block">Order</button>
    </div>
 </section>

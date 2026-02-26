@@ -23,6 +23,7 @@ export const routes: Routes = [
     {path:'products', component:ProductsComponent, title:'products'},
     {path:'productdetails/:id', component:ProductdetailsComponent, title:'productdetails'},
     {path:'categories', component:CategoriesComponent, title:'categories'},
+    {path:'categories/:categoryId', component:CategoriesComponent, title:'categories'},
     {path:'brands', component:BrandsComponent, title:'brands'},
     {path:'login', component:LoginComponent, title:'login'},
     {path:'register', component:RegisterComponent, title:'register'},
